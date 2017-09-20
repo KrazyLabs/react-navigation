@@ -1,7 +1,7 @@
 /* @flow */
 
 import React, { PureComponent } from 'react';
-import { View, StyleSheet } from 'react-native';
+import { Platform, Dimensions, View, StyleSheet } from 'react-native';
 import { TabViewAnimated, TabViewPagerPan } from 'react-native-tab-view';
 import SceneView from '../SceneView';
 import withCachedChildNavigation from '../../withCachedChildNavigation';
@@ -140,7 +140,13 @@ class TabView extends PureComponent<void, Props, void> {
     );
   };
 
-  _renderPager = (props: *) => <TabViewPagerPan {...props} initialLayout={{ height: 0, width: 1 }} />;
+  _renderPager = (props: *) => {
+    if (Platform.OS === 'android') {
+      const { width, height } = Dimensions.get('window')
+      props.initialLayout= { width, height }
+    }
+    return <TabViewPagerPan {...props} />;
+  }
 
   render() {
     const {
@@ -192,7 +198,12 @@ class TabView extends PureComponent<void, Props, void> {
       style: styles.container,
     };
 
-    return <TabViewAnimated {...props} initialLayout={{ height: 0, width: 1 }} />;
+    if (Platform.OS === 'android') {
+      const { width, height } = Dimensions.get('window')
+      props.initialLayout= { width, height }
+    }
+
+    return <TabViewAnimated {...props} />;
   }
 }
 
