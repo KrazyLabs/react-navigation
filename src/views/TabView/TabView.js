@@ -140,7 +140,7 @@ class TabView extends PureComponent<void, Props, void> {
     );
   };
 
-  _renderPager = (props: *) => <TabViewPagerPan {...props} />;
+  _renderPager = (props: *) => <TabViewPagerPan {...props} initialLayout={{ height: 0, width: 1 }} />;
 
   render() {
     const {
@@ -192,7 +192,7 @@ class TabView extends PureComponent<void, Props, void> {
       style: styles.container,
     };
 
-    return <TabViewAnimated {...props} />;
+    return <TabViewAnimated {...props} initialLayout={{ height: 0, width: 1 }} />;
   }
 }
 
